@@ -1,0 +1,22 @@
+table,
+th,
+td
+{
+    margin: 0 auto;
+
+    border-collapse: collapse;
+
+    color: #73A5FD;
+    border-style: solid;
+    border-color: #A40DF6;
+}
+div{
+	width: 130px;
+	margin: 0 auto;
+}
+.tableFoot{
+	margin-left: 40px;
+}
+.change{
+	margin-left: 90px;
+}
