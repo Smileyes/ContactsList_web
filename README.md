@@ -1,2 +1,3 @@
 # ContactsList_web
-鐢↗avaWeb瀹炵幇鈥滅數璇濈翱鈥濆姛鑳斤紝鍚屾椂缁冧範Git鐨勫懡浠よ鎿嶄綔
+
+用JavaWeb实现“电话簿”功能
