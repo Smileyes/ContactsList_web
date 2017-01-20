@@ -23,8 +23,8 @@ public class changeServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		Dao dao = new DaoImpl();
 		Contact c = dao.findContact(id);
-		request.setAttribute("contact", c);
-		request.getRequestDispatcher("/jsp/change.jsp").forward(request, response);
+		request.getServletContext().setAttribute("contact", c);
+		response.sendRedirect("jsp/change.jsp");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

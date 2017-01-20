@@ -23,7 +23,7 @@ public class RemoveServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		Dao dao = new DaoImpl();
 		dao.removeContact(id);
-		response.sendRedirect("/ContactsList_web/indexServlet");
+		response.sendRedirect("/ContactsList_web/jsp/index.jsp");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

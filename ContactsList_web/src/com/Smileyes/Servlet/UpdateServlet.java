@@ -25,7 +25,7 @@ public class UpdateServlet extends HttpServlet {
 		Contact c = new Contact(id, name, gender, number, email);
 		Dao dao = new DaoImpl();
 		dao.changeContact(c);
-		response.sendRedirect("/ContactsList_web/indexServlet");
+		response.sendRedirect("/ContactsList_web/jsp/index.jsp");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

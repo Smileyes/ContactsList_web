@@ -4,6 +4,7 @@
 package com.Smileyes.Servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class UpdateAddServlet extends HttpServlet {
 		Contact c = new Contact(id, name, gender, number, email);
 		Dao dao = new DaoImpl();
 		dao.addContact(c);
-		response.sendRedirect("/ContactsList_web/indexServlet");
+		response.sendRedirect("/ContactsList_web/jsp/index.jsp");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
