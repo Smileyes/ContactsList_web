@@ -12,34 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import com.Smileyes.dao.Dao;
 import com.Smileyes.entity.Contact;
+import com.Smileyes.uitl.XMLUtil;
 
 public class DaoImpl implements Dao {
 	// 添加联系人
 	public void addContact(Contact c) {
-		SAXReader reader = new SAXReader();
-		Document doc = null;
-		XMLWriter writer = null;
-		try {
-			doc = reader.read("F:/data/contactsList.xml");
-			writer = new XMLWriter(new FileOutputStream(
-					"F:/data/contactsList.xml"),
-					OutputFormat.createPrettyPrint());
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		XMLUtil util = new XMLUtil();
+		Document doc = util.getDocument();
 		Element rootEle = doc.getRootElement();
 		Element contactEle = rootEle.addElement("contact");
 		contactEle.addAttribute("id", c.getId());
@@ -47,84 +35,35 @@ public class DaoImpl implements Dao {
 		contactEle.addElement("gender").setText(c.getGender());
 		contactEle.addElement("number").setText(c.getNumber());
 		contactEle.addElement("email").setText(c.getEmail());
-		try {
-			writer.write(doc);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		util.write2xml(doc);
 	}
 
 	// 删除联系人
 	public void removeContact(String id) {
-		SAXReader reader = new SAXReader();
-		Document doc = null;
-		XMLWriter writer = null;
-		try {
-			doc = reader.read("F:/data/contactsList.xml");
-			writer = new XMLWriter(new FileOutputStream(
-					"F:/data/contactsList.xml"),
-					OutputFormat.createPrettyPrint());
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		XMLUtil util = new XMLUtil();
+		Document doc = util.getDocument();
 		Element targetEle = (Element) doc.selectSingleNode("//contact[@id="
 				+ id + "]");
 		targetEle.detach();
-		try {
-			writer.write(doc);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		util.write2xml(doc);
 	}
 
 	public void changeContact(Contact c) {
-		SAXReader reader = new SAXReader();
-		Document doc = null;
-		XMLWriter writer = null;
-		try {
-			doc = reader.read("F:/data/contactsList.xml");
-			writer = new XMLWriter(new FileOutputStream(
-					"F:/data/contactsList.xml"),
-					OutputFormat.createPrettyPrint());
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		XMLUtil util = new XMLUtil();
+		Document doc = util.getDocument();
 		Element targetEle = (Element) doc.selectSingleNode("//contact[@id="
 				+ c.getId() + "]");
 		targetEle.element("name").setText(c.getName());
 		targetEle.element("gender").setText(c.getGender());
 		targetEle.element("number").setText(c.getNumber());
 		targetEle.element("email").setText(c.getEmail());
-		try {
-			writer.write(doc);
-			writer.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		util.write2xml(doc);
 	}
 
 	// 搜寻联系人
 	public Contact findContact(String id) {
-		SAXReader reader = new SAXReader();
-		Document doc = null;
-		try {
-			doc = reader.read("F:/data/contactsList.xml");
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		} 
+		XMLUtil util = new XMLUtil();
+		Document doc = util.getDocument();
 		Element targetEle = (Element) doc.selectSingleNode("//contact[@id="
 				+ id + "]");
 		if (targetEle != null) {
@@ -134,7 +73,6 @@ public class DaoImpl implements Dao {
 			String targetEleEmail = targetEle.elementTextTrim("email");
 			return new Contact(id, targetEleName, targetEleGender,
 					targetEleNumber, targetEleEmail);
-
 		} else {
 			return null;
 		}
@@ -146,13 +84,8 @@ public class DaoImpl implements Dao {
 		if (!file.exists()) {
 			this.prepare();
 		}
-		SAXReader reader = new SAXReader();
-		Document doc = null;
-		try {
-			doc = reader.read("F:/data/contactsList.xml");
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		} 
+		XMLUtil util = new XMLUtil();
+		Document doc = util.getDocument();
 		Element rootEle = doc.getRootElement();
 		List<Contact> list = new ArrayList<Contact>();
 		List<Element> contactsEle = rootEle.elements();
@@ -187,5 +120,17 @@ public class DaoImpl implements Dao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean checkContact(Contact c) {
+		XMLUtil util = new XMLUtil();
+		Document doc = util.getDocument();
+		Node n1 = doc.selectSingleNode("//contact[@id=" + c.getId() + "]");
+		Node n2 = doc.selectSingleNode("//contact/name[text()='" + c.getName()
+				+ "']");
+		if (n1 == null && n2 == null) {
+			return true;
+		}
+		return false;
 	}
 }

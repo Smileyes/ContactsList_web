@@ -4,16 +4,18 @@
 package com.Smileyes.Servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Smileyes.Exception.ConExitException;
 import com.Smileyes.dao.Dao;
 import com.Smileyes.dao.impl.DaoImpl;
 import com.Smileyes.entity.Contact;
+import com.Smileyes.service.Service;
+import com.Smileyes.service.impl.ContactService;
 
 public class UpdateAddServlet extends HttpServlet {
 
@@ -27,9 +29,14 @@ public class UpdateAddServlet extends HttpServlet {
 		String number = request.getParameter("number");
 		String email = request.getParameter("email");
 		Contact c = new Contact(id, name, gender, number, email);
-		Dao dao = new DaoImpl();
-		dao.addContact(c);
-		response.sendRedirect("/ContactsList_web/jsp/index.jsp");
+		Service service = new ContactService();
+		try {
+			service.addContact(c);
+		} catch (ConExitException e) {
+			request.setAttribute("msg", "该联系人已存在");
+		}
+		request.getRequestDispatcher("/indexServlet").forward(
+				request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

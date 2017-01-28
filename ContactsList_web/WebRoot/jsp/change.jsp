@@ -1,22 +1,19 @@
 <%@ page language="java" import="java.util.*,com.Smileyes.entity.*"
 	pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <title>修改联系人</title>
 </head>
-<link rel="stylesheet" type="text/css" href="<%=path%>/css/add.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/add.css">
 
 <body>
 	<div>修改联系人信息</div>
-	<form action="<%=path%>/UpdateServlet" method="POST">
+	<form action="${pageContext.request.contextPath}/UpdateServlet"
+		method="POST">
 		<table>
 			<tr>
 				<td>ID</td>
@@ -28,8 +25,11 @@
 				<td><input type="text" name="name" value="${contact.name }"></td>
 			</tr>
 			<tr>
-				<td>性别</td>
-				<td><input type="text" name="gender" value="${contact.gender}" readOnly="readOnly"></td>
+				<td>性别</td> 
+				<td>
+				男:<input type="radio" name="gender" value="男" <c:if test="${contact.gender == '男'}">checked="chenked" </c:if> >
+				女:<input type="radio" name="gender" value="女" <c:if test="${contact.gender == '女'}">checked="chenked" </c:if>>
+				</td>
 			</tr>
 			<tr>
 				<td>号码</td>
@@ -45,7 +45,7 @@
 		</table>
 	</form>
 	<div>
-		<a href="<%=path%>/jsp/index.jsp">回到首页</a>
+		<a href="${pageContext.request.contextPath}/indexServlet">回到首页</a>
 	</div>
 </body>
 

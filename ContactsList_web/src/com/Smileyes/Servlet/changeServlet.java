@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.Smileyes.dao.Dao;
 import com.Smileyes.dao.impl.DaoImpl;
 import com.Smileyes.entity.Contact;
+import com.Smileyes.service.Service;
+import com.Smileyes.service.impl.ContactService;
 
 public class changeServlet extends HttpServlet {
 
@@ -21,10 +23,11 @@ public class changeServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		String id = request.getParameter("id");
-		Dao dao = new DaoImpl();
-		Contact c = dao.findContact(id);
+		Service service = new ContactService();
+		Contact c = service.findContact(id);
 		request.getServletContext().setAttribute("contact", c);
-		response.sendRedirect("jsp/change.jsp");
+		request.getRequestDispatcher("jsp/change.jsp").forward(request,
+				response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

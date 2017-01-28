@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.Smileyes.dao.Dao;
 import com.Smileyes.dao.impl.DaoImpl;
 import com.Smileyes.entity.Contact;
+import com.Smileyes.service.Service;
+import com.Smileyes.service.impl.ContactService;
 
 public class UpdateServlet extends HttpServlet {
 
@@ -23,9 +25,9 @@ public class UpdateServlet extends HttpServlet {
 		String number = request.getParameter("number");
 		String email = request.getParameter("email");
 		Contact c = new Contact(id, name, gender, number, email);
-		Dao dao = new DaoImpl();
-		dao.changeContact(c);
-		response.sendRedirect("/ContactsList_web/jsp/index.jsp");
+		Service service = new ContactService();
+		service.changeContact(c);
+		response.sendRedirect("/ContactsList_web/indexServlet");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

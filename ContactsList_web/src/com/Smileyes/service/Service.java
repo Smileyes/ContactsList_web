@@ -1,15 +1,12 @@
-/*
- * Dao接口用与定义本项目相关工具方法的实现对象
- */
-package com.Smileyes.dao;
+package com.Smileyes.service;
 
 import java.util.List;
 
+import com.Smileyes.Exception.ConExitException;
 import com.Smileyes.entity.Contact;
 
-public interface Dao {
-	// 用于添加联系人
-	public void addContact(Contact c);
+public interface Service {
+	public void addContact(Contact c) throws ConExitException;
 
 	// 用于移除联系人
 	public void removeContact(String id);
@@ -22,7 +19,4 @@ public interface Dao {
 
 	// 用于显示所有联系人
 	public List<Contact> showAll();
-
-	// 检查该联系人否存在
-	public boolean checkContact(Contact c);
 }

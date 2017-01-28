@@ -1,9 +1,7 @@
-/*
- * 用于删除联系人
- * */
 package com.Smileyes.Servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,20 +13,19 @@ import com.Smileyes.dao.impl.DaoImpl;
 import com.Smileyes.service.Service;
 import com.Smileyes.service.impl.ContactService;
 
-public class RemoveServlet extends HttpServlet {
+public class indexServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		String id = request.getParameter("id");
 		Service service = new ContactService();
-		service.removeContact(id);
-		response.sendRedirect("/ContactsList_web/indexServlet");
+		List list = service.showAll();
+		request.setAttribute("contacts", list);
+		request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }
