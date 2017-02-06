@@ -21,10 +21,6 @@
 	method="POST">
 	<table>
 		<tr>
-			<td>ID</td>
-			<td><input type="text" name="id"></td>
-		</tr>
-		<tr>
 			<td>姓名</td>
 			<td><input type="text" name="name"></td>
 		</tr>

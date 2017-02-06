@@ -17,18 +17,18 @@
 		<table>
 			<tr>
 				<td>ID</td>
-				<td><input type="text" name="id" value="${contact.id }"
-					readOnly="readOnly"></td>
+				<td><input type="text" name="id" value="${contact.id}"  readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>姓名</td>
 				<td><input type="text" name="name" value="${contact.name }"></td>
 			</tr>
 			<tr>
-				<td>性别</td> 
-				<td>
-				男:<input type="radio" name="gender" value="男" <c:if test="${contact.gender == '男'}">checked="chenked" </c:if> >
-				女:<input type="radio" name="gender" value="女" <c:if test="${contact.gender == '女'}">checked="chenked" </c:if>>
+				<td>性别</td>
+				<td>男:<input type="radio" name="gender" value="男"
+					<c:if test="${contact.gender == '男'}">checked="chenked" </c:if>>
+					女:<input type="radio" name="gender" value="女"
+					<c:if test="${contact.gender == '女'}">checked="chenked" </c:if>>
 				</td>
 			</tr>
 			<tr>

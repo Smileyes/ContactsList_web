@@ -21,7 +21,7 @@ import org.dom4j.io.XMLWriter;
 
 import com.Smileyes.dao.Dao;
 import com.Smileyes.entity.Contact;
-import com.Smileyes.uitl.XMLUtil;
+import com.Smileyes.util.XMLUtil;
 
 public class DaoImpl implements Dao {
 	// 添加联系人
