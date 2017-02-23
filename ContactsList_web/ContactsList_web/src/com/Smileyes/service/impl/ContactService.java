@@ -13,7 +13,7 @@ public class ContactService implements Service {
 	public void addContact(Contact c) throws ConExitException {
 		Dao dao = new DaoImpl_mysql();
 		if (!dao.checkContact(c)) {
-			throw new ConExitException("重复");
+			throw new ConExitException();
 		}
 		dao.findContact(c.getId());
 		dao.addContact(c);

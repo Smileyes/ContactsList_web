@@ -24,5 +24,7 @@
 	<classpathentry kind="lib" path="E:/JDK/lib/hamcrest-all-1.3.jar"/>
 	<classpathentry kind="lib" path="E:/JDK/lib/jaxen-1.1-beta-6.jar"/>
 	<classpathentry kind="lib" path="E:/JDK/lib/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry kind="lib" path="E:/JDK/lib/commons-beanutils-1.9.3.jar" sourcepath="E:/JDK/lib/commons-beanutils-1.9.3-sources.jar"/>
+	<classpathentry kind="lib" path="E:/JDK/lib/commons-dbutils-1.6.jar" sourcepath="E:/JDK/lib/commons-dbutils-1.6-sources.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
